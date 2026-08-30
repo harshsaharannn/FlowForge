@@ -1,14 +1,252 @@
-*{
-    margin : 0;
+* {
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-html,
+
 body {
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "JetBrains Mono", monospace;
 }
-#canvas {
+
+.app {
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    width: 132px;
+    height: 100vh;
+    flex-shrink: 0;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Brand */
+
+.brand {
+    width: 100%;
+    height: 102px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.brand-icon {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Divider */
+
+.divider {
+    width: 80px;
+    height: 1px;
+    background: #eeeeee;
+}
+
+/* Nodes heading */
+
+.nodes-heading {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.add-icon {
+    width: 15px;
+    height: 15px;
+    background: #111111;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1;
+}
+
+/* Node library */
+
+.node-library {
+    width: 100%;
+    margin-top: 39px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.library-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+}
+
+.library-icon {
+    width: 56px;
+    height: 56px;
+    border: 1px solid #bcbcbc;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    font-family: "JetBrains Mono" , monospace;
+    font-size: 19px;
+}
+
+
+
+/* =========================
+   CANVAS
+========================= */
+
+.canvas {
+    flex: 1;
+    height: 100vh;
+
+    background-color: #fafbfc;
+
+    background-image: radial-gradient(
+        #cfd3d8 1.2px,
+        transparent 1.2px
+    );
+
+    background-size: 29px 29px;
+}
+
+/* =========================
+   WORKFLOW NODES
+========================= */
+
+.canvas {
+    position: relative;
+}
+
+/* Node wrapper */
+
+.node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Node card */
+
+.node-card {
+    position: relative;
+
+    width: 80px;
+    height: 80px;
+
+    background: #ffffff;
+    border: 1px solid #bcbcbc;
+    border-radius: 17px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* SVG */
+
+.node-card img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+/* Label */
+
+.node-label {
+    margin-top: 8px;
+
+    font-size: 13px;
+    line-height: 1;
+
+    color: #111111;
+}
+
+/* Connection handles */
+
+.handle {
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    background: #c7c7c7;
+
+    border-radius: 50%;
+
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Input = left */
+
+.input-handle {
+    left: -5px;
+}
+
+/* Output = right */
+
+.output-handle {
+    right: -5px;
+}
+
+
+/* =========================
+   NODE POSITIONS
+========================= */
+
+.trigger-node {
+    left: 220px;
+    top: 300px;
+}
+
+.api-node {
+    left: 430px;
+    top: 300px;
+}
+
+.condition-node {
+    left: 640px;
+    top: 300px;
+}
+
+.transform-node {
+    left: 850px;
+    top: 300px;
+}
+
+.output-node {
+    left: 1060px;
+    top: 300px;
 }

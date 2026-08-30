@@ -1,51 +1,99 @@
-const apiRequestNode = {
+//Phase 1 & 2
+const triggerNode = {
     id: "node-1",
-    type: "apirequest",
+    type: "trigger",
     position: {
-        x: 200,
-        y: 400
+        x: 100,
+        y: 200
+    },
+    configuration: {}
+};
+
+const apiNode = {
+    id: "node-2",
+    type: "apiRequest",
+    position: {
+        x: 400,
+        y: 200
     },
     configuration: {
         method: "GET",
         url: "https://example.com"
     }
-
 };
-const triggerNode = {
-    id: "node-2",
-    type: "trigger",
-    position: {
-        x: 100,
-        y: 300
-    }
-}
-const conditionNode = {
+
+const outputNode = {
     id: "node-3",
-    type: "condition",
+    type: "output",
     position: {
-        x: 300,
-        y: 300
+        x: 700,
+        y: 200
     },
-    configuration: {
-        field: "followers",
-        operator: ">",
-        value: 100
-    }
+    configuration: {}
+};
 
-}
 const connection1 = {
-    source : triggerNode.id , 
-    target : apiRequestNode.id 
-
-}
+    source: "node-1",
+    target: "node-2"
+};
 const connection2 = {
-    source : apiRequestNode.id , 
-    target : conditionNode.id
-}
+    source: "node-2",
+    target: "node-3"
+};
 const nodes = [];
-const connections = [];
-nodes.push(apiRequestNode , triggerNode , conditionNode);
+let connections = [];
+
+//addded all the workflow 
+nodes.push(triggerNode , apiNode , outputNode);
 connections.push(connection1 , connection2);
 
+//updating nodes
+const updatedNode = nodes.find(node=>node.id === triggerNode.id);
+updatedNode.position.x = 100;
+updatedNode.position.y = 400;
 
+//delete nodes
+const deleteIndexNode = nodes.findIndex(node=>node.id === outputNode.id)
+nodes.splice(deleteIndexNode , 1);
+
+// connections get effected too 
+connections = connections.filter(connection=>{
+     return connection.source !== outputNode.id && connection.target !== outputNode.id
+});
+
+//Create workflow
 const workflow = {nodes , connections};
+
+//validate
+const isValid = connections.every(connection =>{
+    const sourceNode = nodes.find(node=>{
+       return node.id === connection.source
+    });
+    const targetNode = nodes.find(node =>{
+        return node.id === connection.target
+    });
+    return sourceNode && targetNode;
+})
+
+
+console.log(workflow);
+console.log(isValid);
+
+// Phase 3 ---------------------------------------
+const nodeElements = document.querySelectorAll(".node");
+nodeElements.forEach(node =>{
+    node.addEventListener("mousedown" , () =>{
+      console.log("dragging started");
+      document.addEventListener("mousemove" , moveNode);
+
+    });
+    document.addEventListener("mouseup" , () =>{
+        document.removeEventListener("mousemove", moveNode);
+    });
+
+});
+function moveNode(event){
+    console.log("Mouse X:" , event.clientX);
+    console.log("Mouse Y:", event.clientY);
+
+}
