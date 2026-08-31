@@ -80,20 +80,30 @@ console.log(workflow);
 console.log(isValid);
 
 // Phase 3 ---------------------------------------
-const nodeElements = document.querySelectorAll(".node");
-nodeElements.forEach(node =>{
-    node.addEventListener("mousedown" , () =>{
-      console.log("dragging started");
-      document.addEventListener("mousemove" , moveNode);
+const nodeElement = document.querySelectorAll(".node");
+const canvas = document.querySelector(".canvas");
+let offsetX = 0;
+let offsetY = 0;
+let selectedNode = null;
 
-    });
-    document.addEventListener("mouseup" , () =>{
-        document.removeEventListener("mousemove", moveNode);
-    });
-
+nodeElement.forEach(node =>{
+  node.addEventListener("mousedown" , event =>{
+    selectedNode = node;
+    const rect = node.getBoundingClientRect();
+    offsetX = event.clientX - rect.left;
+    offsetY = event.clientY - rect.top;
+   
+    document.addEventListener("mousemove", moveNode);
+  });
+  document.addEventListener("mouseup" , ()=>{
+    selectedNode = null;
+    document.removeEventListener("mousemove" , moveNode);
+  });
 });
-function moveNode(event){
-    console.log("Mouse X:" , event.clientX);
-    console.log("Mouse Y:", event.clientY);
 
-}
+function moveNode(event){
+    if(!selectedNode)return;
+    const canvasRect = canvas.getBoundingClientRect()
+    selectedNode.style.left = event.clientX - canvasRect.left - offsetX + "px";
+    selectedNode.style.top = event.clientY - canvasRect.top - offsetY + "px";
+}; 
