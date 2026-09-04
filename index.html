@@ -2,34 +2,72 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>FlowForge</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+    <!-- Google Font -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet"
     >
+ <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
 
-    <link rel="stylesheet" href="css/style.css">
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
+
 
 <body>
 
+
     <div class="app">
 
-        <!-- SIDEBAR -->
+
+        <!-- ==================================
+             SIDEBAR
+        =================================== -->
+
         <aside class="sidebar">
 
+
             <!-- BRAND -->
+
             <div class="brand">
 
                 <div class="brand-icon">
-                    <img src="assets/logo.svg" alt="FlowForge logo">
+
+                    <img
+                        src="assets/logo.svg"
+                        alt="FlowForge logo"
+                        draggable="false"
+                    >
+
                 </div>
 
                 <span>FlowForge</span>
@@ -38,27 +76,43 @@
 
 
             <!-- DIVIDER -->
+
             <div class="divider"></div>
 
 
             <!-- NODES HEADING -->
+
             <div class="nodes-heading">
 
                 <span>Nodes</span>
 
-                <span class="add-icon">+</span>
+                <span class="add-icon">
+                    +
+                </span>
 
             </div>
 
 
             <!-- NODE LIBRARY -->
+
             <div class="node-library">
 
+
                 <!-- TRIGGER -->
-                <div class="library-item" data-type="trigger">
+
+                <div
+                    class="library-item"
+                    data-type="trigger"
+                >
 
                     <div class="library-icon">
-                        <img src="assets/Trigger.svg" alt="Trigger">
+
+                        <img
+                            src="assets/Trigger.svg"
+                            alt="Trigger"
+                            draggable="false"
+                        >
+
                     </div>
 
                     <span>Trigger</span>
@@ -67,10 +121,20 @@
 
 
                 <!-- API -->
-                <div class="library-item" data-type="api">
+
+                <div
+                    class="library-item"
+                    data-type="api"
+                >
 
                     <div class="library-icon">
-                        <img src="assets/API.svg" alt="API">
+
+                        <img
+                            src="assets/API.svg"
+                            alt="API"
+                            draggable="false"
+                        >
+
                     </div>
 
                     <span>API</span>
@@ -78,11 +142,21 @@
                 </div>
 
 
-                <!-- CONDITION -->
-                <div class="library-item" data-type="condition">
+                <!-- CONDITIONS -->
+
+                <div
+                    class="library-item"
+                    data-type="condition"
+                >
 
                     <div class="library-icon">
-                        <img src="assets/Conditions.svg" alt="Conditions">
+
+                        <img
+                            src="assets/Conditions.svg"
+                            alt="Conditions"
+                            draggable="false"
+                        >
+
                     </div>
 
                     <span>Conditions</span>
@@ -91,10 +165,20 @@
 
 
                 <!-- TRANSFORM -->
-                <div class="library-item" data-type="transform">
+
+                <div
+                    class="library-item"
+                    data-type="transform"
+                >
 
                     <div class="library-icon">
-                        <img src="assets/Transform.svg" alt="Transform">
+
+                        <img
+                            src="assets/Transform.svg"
+                            alt="Transform"
+                            draggable="false"
+                        >
+
                     </div>
 
                     <span>Transform</span>
@@ -103,10 +187,20 @@
 
 
                 <!-- OUTPUT -->
-                <div class="library-item" data-type="output">
+
+                <div
+                    class="library-item"
+                    data-type="output"
+                >
 
                     <div class="library-icon">
-                        <img src="assets/Output.svg" alt="Output">
+
+                        <img
+                            src="assets/Output.svg"
+                            alt="Output"
+                            draggable="false"
+                        >
+
                     </div>
 
                     <span>Output</span>
@@ -118,13 +212,31 @@
         </aside>
 
 
-        <!-- CANVAS -->
-        <main class="canvas"></main>
+        <!-- ==================================
+             CANVAS
+        =================================== -->
+
+        <main class="canvas">
+
+
+            <!-- SVG CONNECTION LAYER -->
+
+            <svg
+                class="connections"
+            ></svg>
+
+
+        </main>
+
 
     </div>
 
 
-    <script src="js/main.js"></script>
+    <!-- JAVASCRIPT -->
+
+    <script
+        src="js/main.js"
+    ></script>
 
 </body>
 

@@ -1,6 +1,6 @@
-/* =========================
+/* ========================================
    RESET
-========================= */
+======================================== */
 
 * {
     margin: 0;
@@ -9,106 +9,146 @@
 }
 
 
-/* =========================
+/* ========================================
    BODY
-========================= */
+======================================== */
 
 body {
+
     width: 100%;
+
     height: 100vh;
+
     overflow: hidden;
 
-    font-family: "JetBrains Mono", monospace;
+    font-family:
+        "JetBrains Mono",
+        monospace;
 }
 
 
-/* =========================
+/* ========================================
    APP
-========================= */
+======================================== */
 
 .app {
+
     width: 100%;
+
     height: 100vh;
 
     display: flex;
 }
 
 
-/* =========================
+/* ========================================
    SIDEBAR
-========================= */
+======================================== */
 
 .sidebar {
+
     width: 132px;
+
     height: 100vh;
 
     flex-shrink: 0;
 
-    background: #ffffff;
-    border: 1px solid #dddddd;
+    background: #fff;
+
+    border: 1px solid #ddd;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 }
 
 
-/* =========================
+/* ========================================
    BRAND
-========================= */
+======================================== */
 
 .brand {
+
     width: 100%;
+
     height: 102px;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
     justify-content: center;
 
     gap: 8px;
 
     font-size: 14px;
+
     font-weight: 600;
 }
 
+
+/* ========================================
+   BRAND ICON
+======================================== */
+
 .brand-icon {
+
     height: 28px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 }
 
+
 .brand-icon img {
+
     width: 28px;
+
     height: 28px;
+
+    object-fit: contain;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
 }
 
 
-/* =========================
+/* ========================================
    DIVIDER
-========================= */
+======================================== */
 
 .divider {
+
     width: 80px;
+
     height: 1px;
 
-    background: #eeeeee;
+    background: #eee;
 }
 
 
-/* =========================
+/* ========================================
    NODES HEADING
-========================= */
+======================================== */
 
 .nodes-heading {
+
     width: 100%;
 
     margin-top: 40px;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
 
     gap: 6px;
@@ -116,42 +156,67 @@ body {
     font-size: 14px;
 }
 
+
+/* ========================================
+   ADD ICON
+======================================== */
+
 .add-icon {
+
     width: 15px;
+
     height: 15px;
 
-    background: #111111;
-    color: #ffffff;
+    background: #111;
+
+    color: #fff;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     font-family: Arial, sans-serif;
+
     font-size: 14px;
+
     line-height: 1;
+
+    user-select: none;
 }
 
 
-/* =========================
+/* ========================================
    NODE LIBRARY
-========================= */
+======================================== */
 
 .node-library {
+
     width: 100%;
 
     margin-top: 39px;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 
     gap: 25px;
 }
 
+
+/* ========================================
+   LIBRARY ITEM
+======================================== */
+
 .library-item {
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 
     gap: 6px;
@@ -159,170 +224,282 @@ body {
     font-size: 13px;
 
     cursor: grab;
+
     user-select: none;
+
+    -webkit-user-drag: element;
 }
 
+
 .library-item:active {
+
     cursor: grabbing;
 }
 
 
-/* =========================
+/* ========================================
    LIBRARY ICON
-========================= */
+======================================== */
 
 .library-icon {
+
     width: 56px;
+
     height: 56px;
 
     border: 1px solid #bcbcbc;
+
     border-radius: 15px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    background: #ffffff;
+    background: #fff;
 }
 
+
 .library-icon img {
+
     width: 22px;
+
     height: 22px;
 
     object-fit: contain;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    pointer-events: none;
 }
 
 
-/* =========================
+/* ========================================
    CANVAS
-========================= */
+======================================== */
 
 .canvas {
+
     position: relative;
 
     flex: 1;
+
     height: 100vh;
 
     overflow: hidden;
 
     background-color: #fafbfc;
 
-    background-image: radial-gradient(
-        #cfd3d8 1.2px,
-        transparent 1.2px
-    );
+    background-image:
+        radial-gradient(
+            #cfd3d8 1.2px,
+            transparent 1.2px
+        );
 
     background-size: 29px 29px;
 }
 
 
-/* =========================
-   WORKFLOW NODE
-========================= */
+/* ========================================
+   SVG CONNECTION LAYER
+======================================== */
+
+.connections {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* ========================================
+   NODE
+======================================== */
 
 .node {
+
     position: absolute;
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
 
     cursor: grab;
+
     user-select: none;
 
     z-index: 1;
+
+    -webkit-user-drag: none;
 }
 
+
 .node:active {
+
     cursor: grabbing;
 }
 
 
-/* =========================
+.node,
+.node * {
+
+    -webkit-user-drag: none;
+}
+
+
+/* ========================================
    NODE CARD
-========================= */
+======================================== */
 
 .node-card {
+
     position: relative;
 
     width: 80px;
+
     height: 80px;
 
-    background: #ffffff;
+    background: #fff;
 
     border: 1px solid #bcbcbc;
+
     border-radius: 17px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
+
+/* ========================================
+   NODE ICON
+======================================== */
+
 .node-card img {
+
     width: 28px;
+
     height: 28px;
 
     object-fit: contain;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    pointer-events: none;
 }
 
 
-/* =========================
+/* ========================================
    NODE LABEL
-========================= */
+======================================== */
 
 .node-label {
+
     margin-top: 8px;
 
     font-size: 13px;
+
     line-height: 1;
 
-    color: #111111;
+    color: #111;
+
+    user-select: none;
+
+    pointer-events: none;
 }
 
 
-/* =========================
-   CONNECTION HANDLES
-========================= */
+/* ========================================
+   HANDLES
+======================================== */
 
 .handle {
+
     position: absolute;
 
     width: 8px;
+
     height: 8px;
 
     background: #c7c7c7;
 
     border-radius: 50%;
 
-    top: 50%;
-
     transform: translateY(-50%);
+
+    z-index: 2;
+
+    cursor: crosshair;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
 }
+
+
+/* ========================================
+   INPUT HANDLE
+======================================== */
 
 .input-handle {
+
     left: -5px;
+
+    top: 50%;
 }
+
+
+/* ========================================
+   NORMAL OUTPUT HANDLE
+======================================== */
 
 .output-handle {
+
     right: -5px;
+
+    top: 50%;
 }
 
 
-/* =========================
-   CONNECTION SVG
-========================= */
+/* ========================================
+   CONDITIONS — IF OUTPUT
+======================================== */
 
-.connections {
-    position: absolute;
+.condition-if-handle {
 
-    inset: 0;
+    right: -5px;
 
-    width: 100%;
-    height: 100%;
+    top: 30%;
+}
 
-    pointer-events: none;
 
-    z-index: 0;
+/* ========================================
+   CONDITIONS — ELSE OUTPUT
+======================================== */
+
+.condition-else-handle {
+
+    right: -5px;
+
+    top: 70%;
 }
