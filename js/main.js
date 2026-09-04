@@ -1,507 +1,138 @@
-// =========================
-// PHASE 1 & 2
-// =========================
-
-const triggerNode = {
-    id: "node-1",
-    type: "trigger",
-    position: {
-        x: 100,
-        y: 200
-    },
-    configuration: {}
-};
-
-
-const apiNode = {
-    id: "node-2",
-    type: "apiRequest",
-    position: {
-        x: 400,
-        y: 200
-    },
-    configuration: {
-        method: "GET",
-        url: "https://example.com"
-    }
-};
-
-
-const conditionNode = {
-    id: "node-3",
-    type: "condition",
-    position: {
-        x: 700,
-        y: 200
-    },
-    configuration: {}
-};
-
-
-const transformNode = {
-    id: "node-4",
-    type: "transform",
-    position: {
-        x: 1000,
-        y: 200
-    },
-    configuration: {}
-};
-
-
-const outputNode = {
-    id: "node-5",
-    type: "output",
-    position: {
-        x: 1300,
-        y: 200
-    },
-    configuration: {}
-};
-
-
-// =========================
-// CONNECTIONS
-// =========================
-
-const connection1 = {
-    source: "node-1",
-    target: "node-2"
-};
-
-const connection2 = {
-    source: "node-2",
-    target: "node-3"
-};
-
-const connection3 = {
-    source: "node-3",
-    target: "node-4"
-};
-
-const connection4 = {
-    source: "node-4",
-    target: "node-5"
-};
-
-
-// =========================
-// WORKFLOW ARRAYS
-// =========================
-
 const nodes = [];
-
-let connections = [];
-
-
-// Add all 5 nodes
-
-nodes.push(
-    triggerNode,
-    apiNode,
-    conditionNode,
-    transformNode,
-    outputNode
-);
-
-
-// Add all connections
-
-connections.push(
-    connection1,
-    connection2,
-    connection3,
-    connection4
-);
-
-
-// =========================
-// UPDATE NODE
-// =========================
-
-const updatedNode = nodes.find(
-    node => node.id === triggerNode.id
-);
-
-updatedNode.position.x = 100;
-updatedNode.position.y = 200;
-
-
-// =========================
-// CREATE WORKFLOW
-// =========================
-
-const workflow = {
-    nodes,
-    connections
-};
-
-
-// =========================
-// VALIDATE CONNECTIONS
-// =========================
-
-const isValid = connections.every(connection => {
-
-    const sourceNode = nodes.find(node => {
-        return node.id === connection.source;
-    });
-
-    const targetNode = nodes.find(node => {
-        return node.id === connection.target;
-    });
-
-    return sourceNode && targetNode;
-});
-
-
-console.log(workflow);
-console.log(isValid);
-
-
-// =========================
-// PHASE 3
-// RENDER NODES
-// =========================
-
+const connections =[];
 const canvas = document.querySelector(".canvas");
-const svg = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "svg"
-);svg.classList.add("connections");
-canvas.append(svg)
+
+const libraryItems = document.querySelectorAll(".library-item");
 
 
-nodes.forEach(node => {
-
-    // =========================
-    // CREATE NODE WRAPPER
-    // =========================
-
-    const nodeElement = document.createElement("div");
-
-    nodeElement.id = node.id;
-
-    nodeElement.classList.add("node");
-
-
-    // =========================
-    // POSITION NODE
-    // =========================
-
-    nodeElement.style.left =
-        node.position.x + "px";
-
-    nodeElement.style.top =
-        node.position.y + "px";
-
-
-    // =========================
-    // CREATE CARD
-    // =========================
-
-    const nodeCard = document.createElement("div");
-
-    nodeCard.classList.add("node-card");
-
-
-    // =========================
-    // CREATE ICON
-    // =========================
-
-    const nodeIcon = document.createElement("img");
-
-
-    if (node.type === "trigger") {
-
-        nodeIcon.src = "assets/Trigger.svg";
-
+function createNode(type){
+    const node = {
+        id: `node-${nodes.length+1}`,
+        type : type,
+        position: {
+            x:100 + (nodes.length * 180) ,
+            y:200
+        },
+        configuration:{}
     }
-
-
-    if (node.type === "apiRequest") {
-
-        nodeIcon.src = "assets/API.svg";
-
-    }
-
-
-    if (node.type === "condition") {
-
-        nodeIcon.src = "assets/Conditions.svg";
-
-    }
-
-
-    if (node.type === "transform") {
-
-        nodeIcon.src = "assets/Transform.svg";
-
-    }
-
-
-    if (node.type === "output") {
-
-        nodeIcon.src = "assets/Output.svg";
-
-    }
-
-
-    nodeIcon.alt = node.type;
-
-
-    // Put icon inside card
-
-    nodeCard.appendChild(nodeIcon);
-
-
-    // =========================
-    // CREATE LABEL
-    // =========================
-
-    const nodeLabel = document.createElement("div");
-
-    nodeLabel.classList.add("node-label");
-
-    nodeLabel.textContent = node.type;
-
-
-    // =========================
-    // CREATE INPUT HANDLE
-    // =========================
-
-// =========================
-// CREATE HANDLES
-// =========================
-
-// Every node except Trigger needs an INPUT
-
-if (node.type !== "trigger") {
-
-    const inputHandle = document.createElement("div");
-
-    inputHandle.classList.add(
-        "handle",
-        "input-handle"
-    );
-
-    nodeCard.appendChild(inputHandle);
-}
-
-
-// Every node except Output needs an OUTPUT
-
-if (node.type !== "output") {
-
-    const outputHandle = document.createElement("div");
-
-    outputHandle.classList.add(
-        "handle",
-        "output-handle"
-    );
-
-    nodeCard.appendChild(outputHandle);
-}
-
-    // =========================
-    // PUT CARD + LABEL
-    // INSIDE NODE
-    // =========================
-
-    nodeElement.appendChild(nodeCard);
-
-    nodeElement.appendChild(nodeLabel);
-
-
-    // =========================
-    // PUT NODE ON CANVAS
-    // =========================
-
-    canvas.appendChild(nodeElement);
-
-});
-
-// =========================
-// GET CREATED NODES
-// =========================
-
-const nodeElement =
-    document.querySelectorAll(".node");
-
-
-// =========================
-// DRAGGING VARIABLES
-// =========================
-
-let offsetX = 0;
-
-let offsetY = 0;
-
-let selectedNode = null;
-
-
-// =========================
-// MOUSE DOWN
-// =========================
-
-nodeElement.forEach(node => {
-
-    node.addEventListener(
-        "mousedown",
-        event => {
-
-            selectedNode = node;
-
-
-            // Get node position
-            // relative to browser
-
-            const rect =
-                node.getBoundingClientRect();
-
-
-            // Remember where
-            // inside the node
-            // the mouse grabbed
-
-            offsetX =
-                event.clientX - rect.left;
-
-            offsetY =
-                event.clientY - rect.top;
-
-
-            // Start listening
-            // for mouse movement
-
-            document.addEventListener(
-                "mousemove",
-                moveNode
-            );
-
-        }
-    );
-
-
-    // =========================
-    // MOUSE UP
-    // =========================
-
-    document.addEventListener(
-        "mouseup",
-        () => {
-
-            selectedNode = null;
-
-
-            document.removeEventListener(
-                "mousemove",
-                moveNode
-            );
-
-        }
-    );
-
-});
-
-// drawing the connection lines 
-const sourceHandle = document.querySelector("#node-1 .output-handle");
-const targetHandle = document.querySelector("#node-2 .input-handle")
-
-
-const line = document.createElementNS(
-    "http://www.w3.org/2000/svg",
-    "line"
-);
-
-line.setAttribute("stroke" , "black");
-line.setAttribute("stroke-width" , "2")
-
-svg.appendChild(line);
-
- function updateConnection(){
-    const sourceHandleRect = sourceHandle.getBoundingClientRect();
-    const targetHandleRect = targetHandle.getBoundingClientRect();
-    const canvasRect = canvas.getBoundingClientRect();
-
-    const startX = sourceHandleRect.x - canvasRect.left + sourceHandleRect.width/2;
-    const startY = sourceHandleRect.y - canvasRect.top + sourceHandleRect.height/2;
-
-    const endX = targetHandleRect.x - canvasRect.left + targetHandleRect.width/2;
-    const endY = targetHandleRect.y - canvasRect.top + targetHandleRect.height/2;
-
-    line.setAttribute("x1" , startX);
-    line.setAttribute("y1" , startY);
-
-    line.setAttribute("x2" , endX);
-    line.setAttribute("y2" , endY);
+    return node;
 };
 
-// =========================
-// MOVE NODE
-// =========================
+function renderNode(node){ 
+    const nodeElement = document.createElement("div");
+    nodeElement.classList.add("node");
+    nodeElement.dataset.id = node.id;
+    nodeElement.style.left = `${node.position.x}px`;
+    nodeElement.style.top = `${node.position.y}px`;
 
-function moveNode(event) {
+   //node card
+   const card = document.createElement("div");
+   card.classList.add("node-card");
 
-    if (!selectedNode) return;
+   const icon = document.createElement("img");
+   icon.src = `assets/${node.type === "condition" ? "Conditions" : node.type.charAt(0).toUpperCase() + node.type.slice(1)}.svg`;
+    icon.classList.add("node-icon");
 
+   const label = document.createElement("span");
+   label.textContent = node.type.charAt(0).toUpperCase()+node.type.slice(1);
+   label.classList.add("node-label");
 
-    // Get canvas position
-    // relative to browser
+   let inputHandle = null;
+   let outputHandle = null;
 
-    const canvasRect =
-        canvas.getBoundingClientRect();
+    if (node.type !== "trigger") {
+    inputHandle = document.createElement("div");
+    inputHandle.classList.add("handle", "input-handle");
+    card.appendChild(inputHandle);
+}
 
+    if (node.type !== "output") {
+    outputHandle = document.createElement("div");
+    outputHandle.classList.add("handle", "output-handle");
+    card.appendChild(outputHandle);
+}
+     
+card.appendChild(inputHandle);
+card.appendChild(icon);
+card.appendChild(outputHandle);
 
-    // Calculate new X
+nodeElement.appendChild(card);
+nodeElement.appendChild(label);
 
-    const newX =
-        event.clientX
-        - canvasRect.left
-        - offsetX;
+canvas.appendChild(nodeElement);
+makeNodeDraggable(nodeElement, node);
 
+};
 
-    // Calculate new Y
+function makeNodeDraggable(nodeElement , node){
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
 
-    const newY =
-        event.clientY
-        - canvasRect.top
-        - offsetY;
+    nodeElement.addEventListener("mousedown", event =>{
+        isDragging = true;
+        const nodeRect = nodeElement.getBoundingClientRect();
+        offsetX = event.clientX - nodeRect.left;
+        offsetY = event.clientY - nodeRect.top;
+    });
+    document.addEventListener("mousemove" , event=>{
+      if(!isDragging)return;
 
+      const canvasRect = canvas.getBoundingClientRect();
+      node.position.x = event.clientX - canvasRect.left - offsetX;
+      node.position.y = event.clientY - canvasRect.top - offsetY;
 
-    // =========================
-    // MOVE VISUAL NODE
-    // =========================
+      nodeElement.style.left = `${node.position.x}px`;
 
-    selectedNode.style.left =
-        newX + "px";
+        nodeElement.style.top = `${node.position.y}px`;
 
-    selectedNode.style.top =
-        newY + "px";
-
-
-    // =========================
-    // FIND NODE DATA
-    // =========================
-
-    const nodeData = nodes.find(node => {
-
-        return node.id === selectedNode.id;
+ 
+    });
+    document.addEventListener("mouseup" , ()=>{
+        isDragging = false;
 
     });
+};
 
+libraryItems.forEach(item =>{
+    item.addEventListener("click" , ()=>{
+    const type = item.dataset.type;
+    const newNode =  createNode(type);
+    console.log("Clicked item:", item);
+    console.log("Node type:", type);
 
-    // =========================
-    // UPDATE NODE DATA
-    // =========================
+    nodes.push(newNode);
+    renderNode(newNode);
 
-    if (nodeData) {
-
-        nodeData.position.x = newX;
-
-        nodeData.position.y = newY;
-
-    }
-    updateConnection();
    
-}
+    });
+    
+});
+
+libraryItems.forEach(item =>{
+    item.setAttribute("draggable" , "true");
+    item.addEventListener("dragstart" , event=>{
+         const type = item.dataset.type;
+        event.dataTransfer.setData("nodeType" , type);
+
+    });
+});
+
+canvas.addEventListener("dragover" , event=>{
+        event.preventDefault();
+});
+
+canvas.addEventListener("drop" , event=>{
+     event.preventDefault();
+ const type = event.dataTransfer.getData("nodeType");
+ const canvasRect = canvas.getBoundingClientRect();
+ const newNode = createNode(type);
+ newNode.position.x = event.clientX - canvasRect.left;
+ newNode.position.y = event.clientY - canvasRect.top;
+
+  nodes.push(newNode);
+  renderNode(newNode);
+
+});
+
+
