@@ -386,6 +386,16 @@ body {
 
     box-shadow:
         0 4px 10px rgba(0, 0, 0, 0.08);
+
+    transition: border-color 0.2s ease;
+}
+
+
+.node.node-selected .node-card {
+
+    border-color: #3b82f6;
+
+    border-width: 2px;
 }
 
 
@@ -502,4 +512,130 @@ body {
     right: -5px;
 
     top: 70%;
+}
+
+
+/* ========================================
+   CONNECTION STYLES
+======================================== */
+
+.connections path {
+
+    pointer-events: visibleStroke;
+
+    cursor: pointer;
+
+    transition: stroke 0.2s ease;
+}
+
+
+.connections path.selected {
+
+    stroke: #3b82f6 !important;
+}
+
+
+/* ========================================
+   DELETE CONNECTION BUTTON
+======================================== */
+
+.delete-connection-btn {
+
+    position: absolute;
+
+    width: 32px;
+
+    height: 32px;
+
+    background: #ef4444;
+
+    border: none;
+
+    border-radius: 8px;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    color: #fff;
+
+    transition: background 0.2s ease;
+
+    pointer-events: auto;
+}
+
+
+.delete-connection-btn:hover {
+
+    background: #dc2626;
+}
+
+
+.delete-connection-btn:active {
+
+    transform: scale(0.95);
+}
+
+.delete-connection-btn svg {
+
+    pointer-events: none;
+}
+
+
+/* ========================================
+   DELETE NODE ICON
+======================================== */
+
+.delete-node-icon {
+
+    position: absolute;
+
+    width: 24px;
+
+    height: 24px;
+
+    background: #6b7280;
+
+    border-radius: 50%;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 15;
+
+    color: #fff;
+
+    transition: background 0.2s ease;
+
+    pointer-events: auto;
+}
+
+
+.delete-node-icon:hover {
+
+    background: #ef4444;
+}
+
+
+.delete-node-icon:active {
+
+    transform: scale(0.9);
+}
+
+.delete-node-icon svg {
+
+    pointer-events: none;
 }
